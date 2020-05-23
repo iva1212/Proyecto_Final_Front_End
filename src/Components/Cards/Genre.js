@@ -1,12 +1,11 @@
 import React,{Component} from 'react';
 import {Card} from 'react-bootstrap';
 
-
-class Console extends Component {
+class Genre extends Component {
     render(){    return(
         <div className="hvr-grow">
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={this.props.img_source} className="console-image" />
+            <Card.Img variant="top" src={this.props.img_source} className="genre-image" />
             <Card.Body>
             <Card.Title>{this.props.name}</Card.Title>
             </Card.Body>
@@ -15,8 +14,5 @@ class Console extends Component {
 
     );
     }
-
 }
-
-
-export default Console;
+export default Genre;

@@ -7,6 +7,8 @@ import Footer from './Components/Footer';
 import Home from './Components/Home';
 import LogIn from './Components/LogIn';
 import SignUp from './Components/SignUp';
+import GamePage from './Components/Pages/GamePage';
+import Database from './Components/Pages/Database';
 class App extends Component {
   render() {
   return (
@@ -19,6 +21,8 @@ class App extends Component {
               <Route exact path ="/" component={Home} />
               <Route path ="/login" component={LogIn} />
               <Route path="/signUp" component={SignUp}/>
+              <Route path="/games/:id" component={GamePage}/>
+              <Route path="/database" component={Database}/>
         </Switch>
       <div id="footer" className="footer">
         <Route component={Footer} />

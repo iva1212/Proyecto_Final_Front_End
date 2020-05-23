@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Jumbotron,Container } from 'react-bootstrap';
 import GameContainer from './Containers/GameContainer';
 import ConsoleContainer from './Containers/ConsoleContainer';
+import GenreContainer from './Containers/GenreContainer';
 class Home extends Component {
     render(){
         return(
@@ -21,6 +22,10 @@ class Home extends Component {
         <Container>
           <h2>Search by Console</h2>
           <ConsoleContainer></ConsoleContainer>
+        </Container>
+        <Container>
+          <h2>Search by Genre</h2>
+          <GenreContainer></GenreContainer>
         </Container>
         </div>
 

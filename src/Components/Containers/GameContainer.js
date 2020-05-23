@@ -1,20 +1,31 @@
 import React,{Component} from 'react';
 import {Container,Row,Col} from 'react-bootstrap';
+import {Link } from 'react-router-dom';
 import Game from '../Cards/Game';
+
+var json = require('../../dummy.json');
+let games = json;
+
 class GameContainer extends Component {
-    render(){    return(
+    
+    render(){    
+        const items = []
+        for(let i=0;i<games.length;i++){
+            items.push(
+                <Col lg={4}>
+                    <Link to={{
+                    pathname: `/games/${games[i]._id}`,
+                    game: games[i]
+                    }}><Game game={games[i]} key={games[i]._id}/></Link>
+                </Col>
+            )
+        }
+        
+        
+        return(
         <Container  fluid="lg" style={{marginBottom:30}}>
             <Row>
-                <Col lg={4}>
-                <Game name="Super Mario Bros" console="Nintendo Entretainment System" description="The classic mario brothers" img_source="https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_supermariobros_thumb.jpg"/>
-                </Col>
-                <Col lg={4}>
-                <Game name="The Legend of Zelda" console="Nintendo Entretainment System" description="The classic zelda game" img_source="https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_legendofzelda_5_thumb.jpg"/>
-                </Col>
-                <Col lg={4}>
-                <Game name="Megaman 2" console="Nintendo Entretainment System" description="The classic megaman" img_source="https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_megaman2_4_thumb.jpg"/>
-                </Col>
-                
+                {items}
             </Row>
 
         </Container>

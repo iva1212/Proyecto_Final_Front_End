@@ -17,14 +17,22 @@ code {
     height:180px;
     overflow:hidden;
 }
-.console-image{
-  width:286px;
+.console-image,.genre_image{
+    width:286px;
     height:180px;
     overflow:hidden;
 }
 .game-col{
   margin: 30px;
 }
+.game-page-image{
+  width:150px;
+  height:300px;
+  overflow:hidden;
+}
 .footer{
   height: calc(100% - 60px);
+}
+.pagination {
+  justify-content: center;
 }

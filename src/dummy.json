@@ -1,0 +1,26 @@
+[
+    {
+        "_id":0,
+         "name":"Super Mario Bros",
+        "console":"Nintendo Entretainment System",
+        "year":1983,
+        "description":"Super Mario Bros., console game created by the Japanese electronic game manufacturer Nintendo Company, Ltd., in 1985 for the Nintendo Entertainment System (NES). The game, which was based on the arcade game Mario Bros., helped launch one of gaming’s most popular franchises. It stars Mario and Luigi, two Italian plumbers who find themselves in the Mushroom Kingdom trying to rescue Princess Toadstool from the evil King Bowser. It is one of the best-selling game series, with more than 40 million copies sold.",
+        "img_source":"https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_supermariobros_thumb.jpg"
+    },
+    {
+        "_id":1,
+        "name":"The Legend of Zelda",
+        "console":"Nintendo Entretainment System",
+        "year":1986,
+        "description":"The Legend of Zelda is the first installment of the Zelda series. It centers its plot around a boy named Link, who becomes the central protagonist throughout the series. It came out as early as 1986 for the Famicom in Japan, and was later released in the western world, including Europe and the US in 1987",
+        "img_source":"https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_legendofzelda_5_thumb.jpg"
+    
+    },{
+        "_id":2,
+        "name":"Megaman II",
+        "console":"Nintendo Entretainment System",
+        "year":1988,
+        "description":"Mega Man 2 (stylized as Mega Man II) is an action game developed and published by Capcom for the Nintendo Entertainment System. It was released in Japan in 1988 and in North America and PAL regions the following years. Mega Man 2 continues Mega Man's battle against the evil Dr. Wily and his rogue robots.",
+        "img_source":"https://coverproject.sfo2.cdn.digitaloceanspaces.com/nes/nes_megaman2_4_thumb.jpg"
+    }
+]

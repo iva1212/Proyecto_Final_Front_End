@@ -10,11 +10,11 @@ function Header(){
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="">Database</Nav.Link>
+                <Nav.Link href="/database">Database</Nav.Link>
                 
         </Nav>
         <Link to={'/login'}><Button variant="success" style={{margin: '10px'}}>Login</Button></Link>
-        <Link to={'/signUp'}><Button variant="primary" style={{margin: '10px'}}>Signup</Button></Link>
+        <Link to={'/signUp'}><Button variant="primary" style={{margin: '10px'}}>SignUp</Button></Link>
         
         </Navbar.Collapse>
         </Navbar>

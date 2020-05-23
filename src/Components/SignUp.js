@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container,Form,Button,Card } from 'react-bootstrap';
+import { Container,Card } from 'react-bootstrap';
 export default class SignUp extends Component {
     render() {
         return (
