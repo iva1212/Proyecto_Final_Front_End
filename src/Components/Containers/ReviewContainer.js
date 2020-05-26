@@ -3,31 +3,20 @@ import {Pagination} from 'react-bootstrap';
 import Review from '../Cards/Review'
 
 class ReviewContainer extends Component {
-    
-    render(){   
-        let active = 1;
-        let items = [];
-        for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active}>
-            {number}
-            </Pagination.Item>,
-        );
+    constructor(props) {
+		super(props)
+		this.state = {
+			reviews:[]
         }
-
-        const paginationBasic = (
-        <div >
-            <Pagination>{items}</Pagination>
-        </div>
-        );
         
+	}
+    render(){   
         
         return(
         <div>
-            <div class="m-2"><Review ></Review></div>
-            <div class="m-2"><Review ></Review></div>
-            <div class="m-2"><Review ></Review></div>
-            {paginationBasic}
+            <div class="m-2"><Review editable={false}></Review></div>
+            <div class="m-2"><Review editable={false}></Review></div>
+            <div class="m-2"><Review editable={false}></Review></div>
         </div>
 
 

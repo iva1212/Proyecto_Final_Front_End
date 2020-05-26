@@ -1,0 +1,22 @@
+[
+    {
+        "_id":1,
+        "name":"NES",
+        "description":"Nintendo first console",
+        "img_url":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/NES_logo.svg/1200px-NES_logo.svg.png"
+    },
+    {
+        "_id":2,
+        "name":"SNES",
+        "description":"Nintendos Second Console",
+        "img_url":"https://images-na.ssl-images-amazon.com/images/I/71itkDwgyyL._AC_SL1500_.jpg"
+    },
+    {
+        "_id":3,
+        "name":"Sega Genesis",
+        "description":"Segas big console",
+        "img_url":"https://i7.pngflow.com/pngimage/729/63/png-sega-genesis-collection-sega-cd-sega-saturn-playstation-2-super-nintendo-entertainment-system-sega-genesis-sega-genesis-collection-sega-cd-sega-saturn-playstation-2-clipart.png"
+    }
+
+
+]

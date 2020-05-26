@@ -3,7 +3,23 @@ import { Jumbotron,Container } from 'react-bootstrap';
 import GameContainer from './Containers/GameContainer';
 import ConsoleContainer from './Containers/ConsoleContainer';
 import GenreContainer from './Containers/GenreContainer';
+
 class Home extends Component {
+
+    state = {
+      games: []
+    }
+    componentDidMount(){
+      let url = ' http://127.0.0.1:8080/api/games';
+      let settings = {
+        method : 'GET'
+      }
+      fetch(url,settings)
+      .then(res => res.json())
+      .then((data)=>{
+        this.setState({games: data})
+      })
+    }
     render(){
         return(
         <div>
@@ -17,7 +33,7 @@ class Home extends Component {
         </Jumbotron>
         <Container>
         <h2>Search by Title</h2>
-        <GameContainer></GameContainer>
+        <GameContainer games={this.state.games.slice(0,3)}></GameContainer>
         </Container>
         <Container>
           <h2>Search by Console</h2>

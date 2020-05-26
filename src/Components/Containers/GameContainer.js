@@ -3,12 +3,12 @@ import {Container,Row,Col} from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import Game from '../Cards/Game';
 
-var json = require('../../dummy.json');
-let games = json;
+
 
 class GameContainer extends Component {
-    
-    render(){    
+    render(){   
+        
+        const games =  this.props.games;
         const items = []
         for(let i=0;i<games.length;i++){
             items.push(

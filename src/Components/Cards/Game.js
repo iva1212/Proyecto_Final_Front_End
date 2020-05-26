@@ -10,7 +10,9 @@ class Game extends Component {
             <Card.Body>
             <Card.Title>{this.props.game.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{this.props.game.console}</Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">{this.props.game.developer}</Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">{this.props.game.year}</Card.Subtitle>
+
             </Card.Body>
         </Card>
         </div>

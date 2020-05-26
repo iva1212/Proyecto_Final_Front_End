@@ -33,6 +33,8 @@ code {
 .footer{
   height: calc(100% - 60px);
 }
+
 .pagination {
   justify-content: center;
 }
+
