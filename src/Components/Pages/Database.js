@@ -8,12 +8,18 @@ import DeveloperButtons from '../Util/DeveloperButtons';
 import GenreButtons from '../Util/GenreButtons';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 class Database extends Component {
-    state = {
-        loading:true,
-        last:0,
-        activePage:1,
-        games: []
-      }
+    constructor(props) {
+		super(props)
+		this.state = {
+            loading:true,
+            last:0,
+            activePage:1,
+            current:"title",
+            games: []
+        }
+        this.titleFetch = this.titleFetch.bind(this);
+        this.getData = this.getData.bind(this);
+	}
       componentDidMount(){
         let url = ' http://127.0.0.1:8080/api/games';
         let settings = {
@@ -26,10 +32,62 @@ class Database extends Component {
         })
       }
       handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
       }
+      getData(query,type,url_type){
+        let url = 'http://127.0.0.1:8080/api/videogamesBy'+url_type+'/'+query;
+       
+        let settings = {
+            method : 'GET',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            
+        }
+        this.apiCall(url,settings,type);
+      }
+      apiCall(url,settings,type){
+        fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            this.setState({games:responseJSON,current:type});
+        })
+        .catch( err => {
+            alert("Something happend,Try again");
+            console.log(err);
+        });
+      }
+      titleFetch( title ){
+        let url = 'http://127.0.0.1:8080/api/videoGamesByTitle/'+title;
+        let settings = {
+            method : 'GET',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            
+        }
+        this.apiCall(url,settings,"title");
+    }
+
+      
     render(){
+        
+        const handleSubmit = (event) => {
+            const form = event.currentTarget;
+            const title = form.querySelector('#searchTitle');
+            console.log(title);
+            event.preventDefault();
+            event.stopPropagation();
+            
+            this.titleFetch(title.value);
+          };
+
         let results=[];
         
 
@@ -74,17 +132,18 @@ class Database extends Component {
                     <Card>
                         
                         <Card.Body>
-                            <Tabs defaultActiveKey="title" id="search-tab">
+                            <Tabs defaultActiveKey={this.state.current} id="search-tab">
                             <Tab eventKey="title" title="Title">
                             <Container style={{padding:"10px"}}>
-                            <Form>
-                                    <Form.Group md="4" controlId="validationCustomUsername">
+                            <Form onSubmit={handleSubmit}>
+                                    <Form.Group md="4" controlId="searchTitle">
                                         <Form.Label><h3>Search by Title</h3></Form.Label>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                            <InputGroup.Text id="inputGroupPrepend"><FaSearch/></InputGroup.Text>
+                                            <InputGroup.Text ><FaSearch/></InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <Form.Control
+                                            
                                             type="text"
                                             placeholder="Search"
                                             aria-describedby="inputGroupPrepend"
@@ -100,17 +159,20 @@ class Database extends Component {
                             </Tab>
                             <Tab eventKey="console" title="Console">
                             <Container style={{padding:"10px",marginTop:"30px"}}>
-                                <ConsoleButtons></ConsoleButtons>
+                                <ConsoleButtons data={(data) =>{
+                                    this.getData(data,"console","Console")}}></ConsoleButtons>
                             </Container>
                             </Tab>
                             <Tab eventKey="developer" title="Developer">
                             <Container style={{padding:"10px",marginTop:"30px"}}>
-                                <DeveloperButtons></DeveloperButtons>
+                                <DeveloperButtons data={(data) =>{
+                                    this.getData(data,"developer","Developer")}}></DeveloperButtons>
                             </Container>
                             </Tab>
                             <Tab eventKey="genre" title="Genre">
                             <Container style={{padding:"10px",marginTop:"30px"}}>
-                                <GenreButtons></GenreButtons>
+                                <GenreButtons data={(data) =>{
+                                    this.getData(data,"genre","Genre")}}></GenreButtons>
                             </Container>
                             </Tab>
                             </Tabs>

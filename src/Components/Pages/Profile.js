@@ -1,14 +1,27 @@
 import React,{Component} from 'react';
 import {ListGroup,Container,Row,Col,Tab,Card} from 'react-bootstrap';
+import Pagination from "react-js-pagination";
 import {getUserData} from '../Util/Auth';
 import GameContainer from '../Containers/GameContainer';
 import ReviewContainer from '../Containers/ReviewContainer';
 class Profile extends Component{
-    state = {
-        games: []
-      }
+    constructor(props) {
+		super(props)
+		this.state = {
+            activePage : 1,
+            games: [],
+            user: getUserData(),
+            reviews:[]
+        }
+        this.fetchGames = this.fetchGames.bind(this);
+        
+	}
       componentDidMount(){
-        let url = ' http://127.0.0.1:8080/api/games';
+        this.fetchGames()
+        this.fetchReviews()
+      }
+      fetchGames(){
+        let url = ' http://127.0.0.1:8080/api/likeGame/'+this.state.user.email;
         let settings = {
           method : 'GET'
         }
@@ -17,6 +30,35 @@ class Profile extends Component{
         .then((data)=>{
           this.setState({games: data})
         })
+      }
+      fetchReviews(){
+          let url = 'http://127.0.0.1:8080/api/ratingsByUser/'+this.state.user.email;
+          let settings = {
+            method : 'GET',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            
+        }
+          fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            this.setState({reviews : responseJSON});
+        })
+        .catch( err => {
+            alert("Something happend,Try again");
+            console.log(err);
+        });
+
+      }
+      handlePageChange(pageNumber) {
+        this.setState({activePage: pageNumber});
       }
     render(){
         const userData = getUserData();
@@ -32,9 +74,6 @@ class Profile extends Component{
                             </ListGroup.Item>
                             <ListGroup.Item action href="#liked">
                                  Liked Games
-                            </ListGroup.Item>
-                            <ListGroup.Item action href="#unliked">
-                                Disliked Games
                             </ListGroup.Item>
                             <ListGroup.Item action href="#ratings">
                                 Your Ratings
@@ -60,14 +99,21 @@ class Profile extends Component{
                                 <GameContainer games={this.state.games.slice(0,3)}></GameContainer>
                             </Container>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="#unliked">
-                            <Container>
-                                <GameContainer games={this.state.games.slice(3,6)}></GameContainer>
-                            </Container>
-                            </Tab.Pane>
+                            
                             <Tab.Pane eventKey="#ratings">
                             <Container>
-                                <ReviewContainer></ReviewContainer>
+                                <ReviewContainer reviews={this.state.reviews} game_Id={null}></ReviewContainer>
+                                <Pagination
+                                    activePage={this.state.activePage}
+                                    itemsCountPerPage={3}
+                                    totalItemsCount={this.state.reviews.length}
+                                    pageRangeDisplayed={5}
+                                    onChange={this.handlePageChange}
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                    prevPageText="<"
+                                    nextPageText=">"
+                                />
                             </Container>
                             </Tab.Pane>
                             <Tab.Pane eventKey="#recommend">

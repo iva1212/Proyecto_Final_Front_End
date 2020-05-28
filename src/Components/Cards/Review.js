@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Card,Row,Col,Form} from 'react-bootstrap';
+import {Card,Row,Col,Form,Button} from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import {getUserData} from '../Util/Auth';
 class Review extends Component {
@@ -9,13 +9,65 @@ class Review extends Component {
         this.state = {
           rating: 3
         };
+        this.handleSubmit = this.handleSubmit.bind(this)
       }
      
       onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
       }
+      handleSubmit(event){
+        const userData = getUserData();
+        const form = event.currentTarget;
+        const review=form.querySelector('#reviewContent').value
+        const stars = this.state.rating
+        const email = userData.email
+        const game_Id = this.props.game_Id;
+        event.preventDefault();
+        event.stopPropagation();
+        let data = {
+            email,
+            game_Id,
+            stars,
+            review
+        }
+        
+        let url = 'http://127.0.0.1:8080/api/rating';
+        let settings = {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify( data )
+        }
+        console.log(settings.body);
+        fetch( url, settings )
+                .then( response => {
+                    if( response.ok ){
+                        return response.json();
+                    }
+                    throw new Error( response.statusText );
+                })
+                .then( responseJSON => {
+                    alert("Review Added");
+                    window.location.reload();
+                    
+                })
+                .catch( err => {
+                  alert("Review Added");
+                  window.location.reload();
+                });
+
+      }
     render(){    
-        const { rating } = this.state;
+        const review = this.props.review
+        
+        let  rating;
+        if(review){
+          rating = review.stars
+        }
+        else{
+          rating = this.state.rating;
+        }
 
         const text=[];
         const name=[];
@@ -24,10 +76,14 @@ class Review extends Component {
 
         if(this.props.editable){
           text.push(
-              <Form>
+              <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                 <Form.Control id="reviewContent" as="textarea" rows="6" placeholder="Place your comments here" />
                 </Form.Group>
+                <Button variant="primary" type="submit">
+                            Send Review
+                </Button>
+
               </Form>
           )
           name.push(
@@ -36,12 +92,10 @@ class Review extends Component {
         }
         else{
           text.push(
-            <Card.Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend nisi eu blandit ullamcorper.
-            Duis feugiat, lorem eu ultrices ullamcorper, nisi odio semper massa, in eleifend felis erat at dolor.
-             Vivamus rhoncus vulputate ipsum a porttitor. Nulla ante lacus, tincidunt ut nulla nec, tincidunt interdum diam. </Card.Text>
+            <Card.Text>{review.review}</Card.Text>
             )
             name.push(
-              <Col md={4}>Armando Casas</Col>
+            <Col md={4}>{review.author_name}</Col>
             )
         }
         return(

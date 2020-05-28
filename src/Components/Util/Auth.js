@@ -7,9 +7,9 @@ function isLoggedIn(){
             let dateNow = new Date();
 
             if(tokenExpiration < dateNow.getTime()/1000){
+                LogOut();
                 return false;
             }else{
-                
                 return true;
             }
     }
@@ -22,16 +22,21 @@ function isAdmin(){
     let token = localStorage.getItem('token');
     
     if(token){
-        const type = jwtDecode(token).type;
-        
-        if(type == "admin"){
-            return true;
-        }
-        else{
-            return false;
-        }
+        let tokenExpiration = jwtDecode(token).exp;
+            let dateNow = new Date();
+
+            if(tokenExpiration < dateNow.getTime()/1000){
+                LogOut();
+                return false;
+            }else{
+                if(jwtDecode(token).type === 'admin')
+                    return true;
+                else
+                    return false;
+            }
     }
     else{
+        
         return false;
     }
 }
@@ -64,5 +69,36 @@ function getUserData(){
         return false;
     }
 }
+function isFav(id){
+    const user = getUserData()
+    let status=false;
+    let data={
+        email:user.email,
+        id
+    }
+    let url = 'http://127.0.0.1:8080/api/isLiked'
+    let settings = {
+        method : 'POST',
+        headers : {
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+    fetch( url, settings )
+                .then( response => {
+                    if( response.ok ){
+                       status=true;
+                       return true;
+                    }
+                    else{
+                        return false;
+                    }
+                })
+                .catch( err => {
+                    alert(err.message);
+                })
+    
 
-export {isLoggedIn,LogOut,getUserData,isAdmin}
+}
+
+export {isLoggedIn,LogOut,getUserData,isAdmin,isFav}

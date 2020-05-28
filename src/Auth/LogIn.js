@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container,Form,Button,Card } from 'react-bootstrap';
-import {isLoggedIn,LogOut} from '../Components/Util/Auth';
+import {isLoggedIn} from '../Components/Util/Auth';
 export default class Login extends Component {
     render() {
         if(isLoggedIn()){
@@ -30,6 +30,7 @@ export default class Login extends Component {
                     if( response.ok ){
                         return response.json();
                     }
+
                     throw new Error( response.statusText );
                 })
                 .then( responseJSON => {
@@ -37,8 +38,7 @@ export default class Login extends Component {
                     window.location.href = "/";
                 })
                 .catch( err => {
-                    if(err == "Error: Not Found" )
-                        alert("Bad credentials,Try again");
+                    alert("Something happend,Try again");
                     console.log(err);
                 });
         }
@@ -48,8 +48,7 @@ export default class Login extends Component {
             const password = form.querySelector('#formBasicPassword');
             event.preventDefault();
             event.stopPropagation();
-            console.log(email.value);
-            console.log(password.value);
+            
             userLoginFetch(email.value,password.value);
           };
         

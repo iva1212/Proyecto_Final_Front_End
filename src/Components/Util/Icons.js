@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Tooltip,OverlayTrigger} from 'react-bootstrap';
 import { IconContext } from "react-icons";
-import {GiPlatform,GiCrosshair,GiSwordsEmblem,GiPotionBall} from 'react-icons/gi'
+import {GiPlatform,GiCrosshair,GiSwordsEmblem,GiPotionBall,GiJigsawPiece,GiJoystick} from 'react-icons/gi'
 class Icons extends Component {
     render(){
         const game = this.props.game;
@@ -76,6 +76,42 @@ class Icons extends Component {
                     <span>
                         <IconContext.Provider value={{size:"2em"}}>
                             <GiPotionBall/>
+                        </IconContext.Provider>
+                    </span>
+                </OverlayTrigger>
+            );
+        }
+        else if(game.genres[i] === "Puzzle"){
+            items.push(
+                <OverlayTrigger
+                key = 'top'
+                placement='top'
+                overlay={
+                    <Tooltip id='tooltip-top'>
+                        Puzzle
+                    </Tooltip>
+                    }>
+                    <span>
+                        <IconContext.Provider value={{size:"2em"}}>
+                            <GiJigsawPiece/>
+                        </IconContext.Provider>
+                    </span>
+                </OverlayTrigger>
+            );
+        }
+        else if(game.genres[i] === "Arcade"){
+            items.push(
+                <OverlayTrigger
+                key = 'top'
+                placement='top'
+                overlay={
+                    <Tooltip id='tooltip-top'>
+                        Arcade
+                    </Tooltip>
+                    }>
+                    <span>
+                        <IconContext.Provider value={{size:"2em"}}>
+                            <GiJoystick/>
                         </IconContext.Provider>
                     </span>
                 </OverlayTrigger>

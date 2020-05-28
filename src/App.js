@@ -1,3 +1,6 @@
+import 'core-js/es/map';
+import 'core-js/es/set';
+
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateRoute from './Components/Util/PrivateRoute';

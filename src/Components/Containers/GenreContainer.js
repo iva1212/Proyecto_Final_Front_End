@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Container,Row,Col} from 'react-bootstrap';
 import Genre from '../Cards/Genre';
 class GenreContainer extends Component {
+
     render(){    return(
         <Container  fluid="lg" style={{marginBottom:30}}>
             <Row>
@@ -12,7 +13,7 @@ class GenreContainer extends Component {
                 <Genre name="Puzzle"  img_source="https://www.retrogames.cz/games/1030/NES_01.gif"/>
                 </Col>
                 <Col lg={4}>
-                <Genre name="Adventure"  img_source="https://wallpaperstock.net/star-fox-adventures-wallpapers_20826_1600x1200.jpg"/>
+                <Genre name="Adventure"  img_source="https://images-na.ssl-images-amazon.com/images/I/51XWG4874ML.jpg"/>
                 </Col>
                 
             </Row>
