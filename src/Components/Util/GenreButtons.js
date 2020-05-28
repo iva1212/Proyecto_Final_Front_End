@@ -11,7 +11,7 @@ class GenreButtons extends Component {
         this.handleClick = this.handleClick.bind(this);
 	}
     componentDidMount(){
-        let url = ' http://127.0.0.1:8080/api/genres';
+        let url = ' https://videogames-app.herokuapp.com/api/genres';
         let settings = {
           method : 'GET'
         }

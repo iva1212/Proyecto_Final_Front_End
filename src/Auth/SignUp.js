@@ -10,7 +10,7 @@ export default class SignUp extends Component {
             );
         }
         function userSignUpFetch( name,last_name,email, password ){
-            let url = 'http://127.0.0.1:8080/api/users';
+            let url = 'https://videogames-app.herokuapp.com/api/users';
         
             let data = {
                 name,

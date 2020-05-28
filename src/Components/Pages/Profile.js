@@ -8,20 +8,26 @@ class Profile extends Component{
     constructor(props) {
 		super(props)
 		this.state = {
-            activePage : 1,
+            activePageReviews : 1,
+            activePageGames: 1,
             games: [],
+            recommend:[],
             user: getUserData(),
             reviews:[]
         }
         this.fetchGames = this.fetchGames.bind(this);
+        this.fectchRecomendations = this.fectchRecomendations.bind(this)
+        this.handlePageChangeGames = this.handlePageChangeGames.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this)
         
 	}
       componentDidMount(){
         this.fetchGames()
         this.fetchReviews()
+        this.fectchRecomendations()
       }
       fetchGames(){
-        let url = ' http://127.0.0.1:8080/api/likeGame/'+this.state.user.email;
+        let url = ' https://videogames-app.herokuapp.com/api/likeGame/'+this.state.user.email;
         let settings = {
           method : 'GET'
         }
@@ -32,7 +38,7 @@ class Profile extends Component{
         })
       }
       fetchReviews(){
-          let url = 'http://127.0.0.1:8080/api/ratingsByUser/'+this.state.user.email;
+          let url = 'https://videogames-app.herokuapp.com/api/ratingsByUser/'+this.state.user.email;
           let settings = {
             method : 'GET',
             headers : {
@@ -57,8 +63,36 @@ class Profile extends Component{
         });
 
       }
+      fectchRecomendations(){
+        let url = 'https://videogames-app.herokuapp.com/api/recommendedGames/'+this.state.user.email;
+        let settings = {
+          method : 'GET',
+          headers : {
+              'Content-Type' : 'application/json'
+          },
+          
+      }
+        fetch( url, settings )
+            .then( response => {
+                if( response.ok ){
+                    return response.json();
+                }
+
+                throw new Error( response.statusText );
+            })
+            .then( responseJSON => {
+                this.setState({recommend : responseJSON});
+            })
+            .catch( err => {
+                alert("Something happend,Try again");
+                console.log(err);
+            });
+      }
       handlePageChange(pageNumber) {
-        this.setState({activePage: pageNumber});
+        this.setState({activePageReviews: pageNumber});
+      }
+      handlePageChangeGames(pageNumber){
+        this.setState({activePageGames: pageNumber});
       }
     render(){
         const userData = getUserData();
@@ -96,7 +130,18 @@ class Profile extends Component{
                             </Tab.Pane>
                             <Tab.Pane eventKey="#liked">
                             <Container>
-                                <GameContainer games={this.state.games.slice(0,3)}></GameContainer>
+                                <GameContainer games={this.state.games.slice((this.state.activePageGames-1)*3,(this.state.activePageGames)*3)}></GameContainer>
+                                <Pagination
+                                    activePage={this.state.activePageGames}
+                                    itemsCountPerPage={3}
+                                    totalItemsCount={this.state.games.length}
+                                    pageRangeDisplayed={5}
+                                    onChange={this.handlePageChangeGames}
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                    prevPageText="<"
+                                    nextPageText=">"
+                                />
                             </Container>
                             </Tab.Pane>
                             
@@ -104,7 +149,7 @@ class Profile extends Component{
                             <Container>
                                 <ReviewContainer reviews={this.state.reviews} game_Id={null}></ReviewContainer>
                                 <Pagination
-                                    activePage={this.state.activePage}
+                                    activePage={this.state.activePageReviews}
                                     itemsCountPerPage={3}
                                     totalItemsCount={this.state.reviews.length}
                                     pageRangeDisplayed={5}
@@ -118,7 +163,7 @@ class Profile extends Component{
                             </Tab.Pane>
                             <Tab.Pane eventKey="#recommend">
                             <Container>
-                                <GameContainer games={this.state.games.slice(6,9)}></GameContainer>
+                                <GameContainer games={this.state.recommend.slice(0,3)}></GameContainer>
                             </Container>
                             </Tab.Pane>
                         </Tab.Content>

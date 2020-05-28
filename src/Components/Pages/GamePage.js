@@ -42,7 +42,7 @@ class GamePage extends Component {
         this.setState({activePage: pageNumber});
       }
       fetchGames(){
-        let url = ' http://127.0.0.1:8080/api/games/'+this.props.match.params.id;
+        let url = ' https://videogames-app.herokuapp.com/api/games/'+this.props.match.params.id;
         
         let settings = {
           method : 'GET',
@@ -63,7 +63,7 @@ class GamePage extends Component {
         
       }
       fetchRatings(){
-        let url = ' http://127.0.0.1:8080/api/ratingsByGame/'+this.props.match.params.id;
+        let url = ' https://videogames-app.herokuapp.com/api/ratingsByGame/'+this.props.match.params.id;
         
         let settings = {
           method : 'GET',
@@ -90,7 +90,7 @@ class GamePage extends Component {
             id
         }
         
-        let url = 'http://127.0.0.1:8080/api/likeGame';
+        let url = 'https://videogames-app.herokuapp.com/api/likeGame';
         let settings = {
             method : 'POST',
             headers : {
@@ -119,7 +119,7 @@ class GamePage extends Component {
           id
       }
       
-      let url = 'http://127.0.0.1:8080/api/deleteLikedGame';
+      let url = 'https://videogames-app.herokuapp.com/api/deleteLikedGame';
       let settings = {
           method : 'DELETE',
           headers : {
@@ -146,7 +146,7 @@ class GamePage extends Component {
             email:user.email,
             id : this.props.match.params.id
         }
-        let url = 'http://127.0.0.1:8080/api/isLiked'
+        let url = 'https://videogames-app.herokuapp.com/api/isLiked'
         let settings = {
             method : 'POST',
             headers : {

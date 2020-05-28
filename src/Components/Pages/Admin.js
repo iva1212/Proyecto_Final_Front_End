@@ -43,7 +43,7 @@ class Admin extends Component{
             developer,
             img_url
         }
-        let url = ' http://127.0.0.1:8080/api/games';
+        let url = ' https://videogames-app.herokuapp.com/api/games';
         console.log( JSON.stringify( data ))
         let settings = {
             method : 'POST',
@@ -81,7 +81,7 @@ class Admin extends Component{
             description,
             img_url
         }
-        let url = 'http://127.0.0.1:8080/api/consoles';
+        let url = 'https://videogames-app.herokuapp.com/api/consoles';
         let settings = {
             method : 'POST',
             headers : {
@@ -117,7 +117,7 @@ class Admin extends Component{
             name,
             img_url
         }
-        let url = 'http://127.0.0.1:8080/api/genres';
+        let url = 'https://videogames-app.herokuapp.com/api/genres';
         let settings = {
             method : 'POST',
             headers : {
@@ -157,7 +157,7 @@ class Admin extends Component{
             img_url
         }
         
-        let url = 'http://127.0.0.1:8080/api/developers';
+        let url = 'https://videogames-app.herokuapp.com/api/developers';
         let settings = {
             method : 'POST',
             headers : {
@@ -191,7 +191,7 @@ class Admin extends Component{
         let data={
             title:title
         }
-        let url = ' http://127.0.0.1:8080/api/removeVideoGame';
+        let url = ' https://videogames-app.herokuapp.com/api/removeVideoGame';
         let settings = {
           method : 'DELETE',
           headers : {
@@ -222,7 +222,7 @@ class Admin extends Component{
         let data={
             name:name
         }
-        let url = ' http://127.0.0.1:8080/api/removeConsole';
+        let url = ' https://videogames-app.herokuapp.com/api/removeConsole';
         let settings = {
           method : 'DELETE',
           headers : {
@@ -254,7 +254,7 @@ class Admin extends Component{
         let data={
             name:name
         }
-        let url = ' http://127.0.0.1:8080/api/removeGenre';
+        let url = ' https://videogames-app.herokuapp.com/api/removeGenre';
         let settings = {
           method : 'DELETE',
           headers : {
@@ -285,7 +285,7 @@ class Admin extends Component{
         let data={
             name:name
         }
-        let url = ' http://127.0.0.1:8080/api/removeDeveloper';
+        let url = ' https://videogames-app.herokuapp.com/api/removeDeveloper';
         let settings = {
           method : 'DELETE',
           headers : {
@@ -309,7 +309,7 @@ class Admin extends Component{
                 });
     }
     fetchConsoles(){
-        let url = ' http://127.0.0.1:8080/api/consoles';
+        let url = ' https://videogames-app.herokuapp.com/api/consoles';
         let settings = {
           method : 'GET'
         }
@@ -329,7 +329,7 @@ class Admin extends Component{
         })
     }
     fetchDevelopers(){
-        let url = ' http://127.0.0.1:8080/api/developers';
+        let url = ' https://videogames-app.herokuapp.com/api/developers';
         let settings = {
           method : 'GET'
         }
@@ -349,7 +349,7 @@ class Admin extends Component{
         })
     }
     fetchGenres(){
-        let url = ' http://127.0.0.1:8080/api/genres';
+        let url = ' https://videogames-app.herokuapp.com/api/genres';
         let settings = {
           method : 'GET'
         }
@@ -369,7 +369,7 @@ class Admin extends Component{
         })
     }
     fetchGames(){
-        let url = ' http://127.0.0.1:8080/api/games';
+        let url = ' https://videogames-app.herokuapp.com/api/games';
         let settings = {
           method : 'GET'
         }

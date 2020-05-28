@@ -11,7 +11,7 @@ class DeveloperButtons extends Component {
         this.handleClick = this.handleClick.bind(this);
 	}
     componentDidMount(){
-        let url = ' http://127.0.0.1:8080/api/developers';
+        let url = ' https://videogames-app.herokuapp.com/api/developers';
         let settings = {
           method : 'GET'
         }

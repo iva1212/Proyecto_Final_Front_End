@@ -10,7 +10,7 @@ class Home extends Component {
       games: []
     }
     componentDidMount(){
-      let url = ' http://127.0.0.1:8080/api/games';
+      let url = ' https://videogames-app.herokuapp.com/api/games';
       let settings = {
         method : 'GET'
       }
@@ -18,6 +18,7 @@ class Home extends Component {
       .then(res => res.json())
       .then((data)=>{
         this.setState({games: data})
+        console.log(this.state.games);
       })
     }
     render(){

@@ -31,7 +31,7 @@ class Review extends Component {
             review
         }
         
-        let url = 'http://127.0.0.1:8080/api/rating';
+        let url = 'https://videogames-app.herokuapp.com/api/rating';
         let settings = {
             method : 'POST',
             headers : {

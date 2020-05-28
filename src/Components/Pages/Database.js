@@ -21,7 +21,7 @@ class Database extends Component {
         this.getData = this.getData.bind(this);
 	}
       componentDidMount(){
-        let url = ' http://127.0.0.1:8080/api/games';
+        let url = ' https://videogames-app.herokuapp.com/api/games';
         let settings = {
           method : 'GET'
         }
@@ -35,7 +35,7 @@ class Database extends Component {
         this.setState({activePage: pageNumber});
       }
       getData(query,type,url_type){
-        let url = 'http://127.0.0.1:8080/api/videogamesBy'+url_type+'/'+query;
+        let url = 'https://videogames-app.herokuapp.com/api/videogamesBy'+url_type+'/'+query;
        
         let settings = {
             method : 'GET',
@@ -64,7 +64,7 @@ class Database extends Component {
         });
       }
       titleFetch( title ){
-        let url = 'http://127.0.0.1:8080/api/videoGamesByTitle/'+title;
+        let url = 'https://videogames-app.herokuapp.com/api/videoGamesByTitle/'+title;
         let settings = {
             method : 'GET',
             headers : {
